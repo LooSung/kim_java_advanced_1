@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/7e9f6d66-9aa2-4944-8c32-e18f31d195b6)# kim_java_advanced_1
-
 ## **멀티태스킹과 멀티프로세싱**
 ### **멀티태스킹**
 - 몇가지의 프로그램 태스크(Code)가 하나의 프로세서(CPU)에게 수행을 하게끔 하는 작업 수행.
