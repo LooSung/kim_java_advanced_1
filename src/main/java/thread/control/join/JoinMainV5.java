@@ -3,30 +3,23 @@ package thread.control.join;
 import static util.LoggerUtils.log;
 import static util.ThreadUtils.sleep;
 
-public class JoinMainV4 {
+public class JoinMainV5 {
 	public static void main(String[] args) throws InterruptedException {
 		log("Start");
 
 		SumJob sumJon1 = new SumJob(0, 50);
-		SumJob sumJon2 = new SumJob(50, 100);
 
 		Thread thread1 = new Thread(sumJon1, "Thread-1");
-		Thread thread2 = new Thread(sumJon2, "Thread-2");
 
 		thread1.start();
-		thread2.start();
 
-		log("join() - Main Thread 가 Thread-1, Thread-2가 종료 될때 까지 대기");
-		thread1.join(); // WAITING
-		thread2.join(); // WAITING
+		log("join(1000) - Main Thread 가 Thread-1가 1초 까지만 대기 그 후에는 Terminated");
+		thread1.join(1000); // TIMED_WAITING
 		log("Main Thread 대기 완료");
 
 		log("thread1.result = " + sumJon1.result);
-		log("thread2.result = " + sumJon2.result);
 
-		int sumAll = sumJon1.result + sumJon2.result;
-
-		log("Sum = " + sumAll);
+		log("Sum = " + sumJon1.result);
 
 		log("End");
 	}
