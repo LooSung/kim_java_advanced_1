@@ -1,4 +1,4 @@
-package thread.start.control;
+package thread.control;
 
 import thread.start.HelloRunnable;
 
