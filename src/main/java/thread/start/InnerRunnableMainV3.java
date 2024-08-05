@@ -1,6 +1,6 @@
 package thread.start;
 
-import static util.MyLogger.log;
+import static util.LoggerUtils.log;
 
 public class InnerRunnableMainV3 {
 	public static void main(String[] args) {
