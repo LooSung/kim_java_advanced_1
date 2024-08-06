@@ -21,9 +21,9 @@ public class ThreadStopMainV2 {
 		@Override
 		public void run() {
 			try {
-				while (true) {
+				while (true) { // Interrupt check 안함..
 					log("작업 중");
-					Thread.sleep(3000); // RUNNABLE
+					Thread.sleep(3000); // RUNNABLE --> 여기서 Interrupt를 check 함
 				}
 			} catch (InterruptedException e) {
 				log("work thread interrupted : " + Thread.currentThread().isInterrupted()); // RUNNABLE
