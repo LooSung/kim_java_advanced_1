@@ -1,5 +1,6 @@
-package thread.control.interrupt.printer;
+package thread.control.printer;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -7,9 +8,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import static util.LoggerUtils.log;
 import static util.ThreadUtils.sleep;
 
-public class MyPrinterV2 {
+public class MyPrinterV1 {
 
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) {
 		Printer printer = new Printer();
 		Thread printerThread = new Thread(printer, "printer");
 		printerThread.start();
@@ -20,7 +21,7 @@ public class MyPrinterV2 {
 			String input = sc.nextLine();
 
 			if(input.equals("q")){
-				printerThread.interrupt();
+				printer.work = false;
 				break;
 			}
 
@@ -29,26 +30,21 @@ public class MyPrinterV2 {
 	}
 
 	static class Printer implements Runnable {
+		volatile boolean work = true;
 		// ConcurrentLinkedQueue : 동시성 Concurrent을 사용해주자.
 		Queue<String> jobQueue = new ConcurrentLinkedQueue<>();
 
 		@Override
 		public void run() {
-			while(!Thread.interrupted()) {
+			while(work) {
 				if(jobQueue.isEmpty()) {
 					continue;
 				}
 
-				try {
-					String job = jobQueue.poll();
-					log("출력 시작 : " + job + ", 대기문서 : " + jobQueue);
-					Thread.sleep(3000);
-					log("출력 완료");
-				} catch (InterruptedException e) {
-					log("Interrupted");
-					break;
-				}
-
+				String job = jobQueue.poll();
+				log("출력 시작 : " + job + ", 대기문서 : " + jobQueue);
+				sleep(3000);
+				log("출력 완료");
 			}
 
 			log("프린터 종료");
