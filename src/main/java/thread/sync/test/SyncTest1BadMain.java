@@ -32,7 +32,9 @@ public class SyncTest1BadMain {
 		private int count = 0;
 
 		public void increment() {
-			count = count + 1;
+			synchronized (this) {
+				count = count + 1;
+			}
 		}
 
 		public int getCount() {
