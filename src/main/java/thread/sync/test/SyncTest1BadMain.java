@@ -37,7 +37,7 @@ public class SyncTest1BadMain {
 			}
 		}
 
-		public int getCount() {
+		public synchronized int getCount() {
 			return count;
 		}
 	}
