@@ -1,17 +1,18 @@
 package thread.sync;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static util.LoggerUtils.log;
 import static util.ThreadUtils.sleep;
 
-public class BackAccountV5 implements BackAccount {
+public class BackAccountV6 implements BackAccount {
 	private int balance;
 
 	private final Lock lock = new ReentrantLock();
 
-	public BackAccountV5(int initialBalance) {
+	public BackAccountV6(int initialBalance) {
 		this.balance = initialBalance;
 	}
 
@@ -20,9 +21,13 @@ public class BackAccountV5 implements BackAccount {
 		log("거래 시작 : " + getClass().getSimpleName());
 
 		// ReentrantLock 이용
-		if(!lock.tryLock()) {
-			log("[잔입 실패] : 이미 처리중인 작업이 있습니다.");
-			return false;
+		try {
+			if(!lock.tryLock(500, TimeUnit.MILLISECONDS)) {
+				log("[잔입 실패] : 이미 처리중인 작업이 있습니다.");
+				return false;
+			}
+		} catch (InterruptedException ex) {
+			throw new RuntimeException(ex);
 		}
 
 		try {
