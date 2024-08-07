@@ -33,6 +33,12 @@ public class VolatileCountMain {
 	}
 
 	static class MyTask implements Runnable {
+		/*
+		* Java Memory Model : 핵심은! 여러 Thread 작업 순서를 보장하는 happens-before 관계에 대한 정의다.
+		* "happens-before" : Thread 작업 순서를 정의한다.
+		* ex) A 작업에 변경된 내용은 B 작업이 시작 되기전에 모두 메모리에 반영해야한다.
+		*/
+
 		/// boolean flag = true;
 		volatile boolean flag = true;
 		int count;
