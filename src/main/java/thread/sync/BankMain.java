@@ -14,7 +14,6 @@ public class BankMain {
 		t2.start();
 
 		sleep(500);
-
 		log("t1 상태 : " + t1.getState());
 		log("t2 상태 : " + t2.getState());
 
