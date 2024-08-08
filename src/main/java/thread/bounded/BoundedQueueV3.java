@@ -29,7 +29,8 @@ public class BoundedQueueV3 implements BoundedQueue {
 		}
 		queue.offer(data);
 		log("[put] : producer save data, notify()");
-		notify();
+		// notify();
+		notifyAll();
 	}
 
 	@Override public synchronized String take() {
@@ -45,7 +46,8 @@ public class BoundedQueueV3 implements BoundedQueue {
 		}
 		String data = queue.poll();
 		log("[put] : consumer get data, notify()");
-		notify(); // WAIT -> BLOCKED
+		//notify(); // WAIT -> BLOCKED
+		notifyAll();
 
 		return data;
 	}
