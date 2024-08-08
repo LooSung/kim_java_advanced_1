@@ -20,6 +20,7 @@ public class BoundedQueueV3 implements BoundedQueue {
 			log("[put] : Queue is full, so wait buffer");
 
 			try {
+				// 대기 스레드가 생겨 현재 스레드가 대기 상태로 들어가게 됩니다.
 				wait(); // RUNNABLE -> WAITING, 락 반납
 				log("[put] : producer wakeup");
 			} catch (InterruptedException e) {
@@ -35,6 +36,7 @@ public class BoundedQueueV3 implements BoundedQueue {
 		while(queue.isEmpty()) {
 			log("[take] Queue is empty, so wait buffer");
 			try {
+				// 대기 스레드가 생겨 현재 스레드가 대기 상태로 들어가게 됩니다.
 				wait(); // RUNNABLE -> WAITING, 락 반납
 				log("[take] : consumer wakeup");
 			} catch (InterruptedException e) {
