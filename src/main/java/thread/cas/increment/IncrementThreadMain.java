@@ -2,6 +2,7 @@ package thread.cas.increment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static util.ThreadUtils.sleep;
 
@@ -12,6 +13,7 @@ public class IncrementThreadMain {
 		test(new BaseInteger());
 		test(new VolatileInteger());
 		test(new SynchronizedInteger());
+		test(new MyAtomicInteger());
 	}
 
 	private static void test(IncrementInteger incrementInteger) {
