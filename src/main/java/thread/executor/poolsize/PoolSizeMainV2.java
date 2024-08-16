@@ -13,6 +13,9 @@ public class PoolSizeMainV2 {
 	public static void main(String[] args) {
 		// BlockingQueue에 무한으로 넣게 되고, Thread수가 고정되어있다.
 		ExecutorService es = Executors.newFixedThreadPool(2);
+
+		//ExecutorService es = new ThreadPoolExecutor(2, 2, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+
 		log("Pool 생성");
 		printState(es);
 
